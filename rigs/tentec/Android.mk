@@ -8,7 +8,6 @@ LOCAL_SRC_FILES := rx320.c rx340.c rx350.c rx331.c \
 LOCAL_MODULE := tentec
 
 LOCAL_CFLAGS := 
-LOCAL_C_INCLUDES := android include src
-LOCAL_LDLIBS := -lhamlib -Lobj/local/$(TARGET_ARCH_ABI)
+LOCAL_C_INCLUDES := $(HAMLIB_TOP_PATH)/android $(HAMLIB_TOP_PATH)/include $(HAMLIB_TOP_PATH)/src
 
 include $(BUILD_STATIC_LIBRARY)

@@ -9,10 +9,9 @@ LOCAL_SRC_FILES := \
         password.c \
         sha256.c.c
 
-
 LOCAL_MODULE := libsecurity
 LOCAL_CFLAGS := 
-LOCAL_C_INCLUDES := android include
+LOCAL_C_INCLUDES := $(HAMLIB_TOP_PATH)/android $(HAMLIB_TOP_PATH)/include
 LOCAL_STATIC_LIBRARIES := adat alinco amsat aor ars barrett celestron cnctrk \
         dorji drake dummy easycomm elad ether6 flexradio fodtrack \
         gs232a heathkit icmarine icom ioptron jrc kachina kenwood kit \

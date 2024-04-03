@@ -8,13 +8,12 @@ LOCAL_SRC_FILES := ft100.c ft747.c ft817.c ft847.c ft890.c ft900.c ft920.c \
 		vr5000.c ft767gx.c ft840.c ft980.c vx1700.c \
 		newcat.c ft450.c ft950.c ft2000.c ft9000.c ft5000.c \
 		ft1200.c ft991.c ft600.c ft3000.c ftdx101.c ftdx101mp.c \
-	       	ft891.c ftdx10.c \
+	       	ft891.c ftdx10.c ft990v12.c ft710.c \
 		yaesu.c
 
 LOCAL_MODULE := yaesu
 
 LOCAL_CFLAGS := 
-LOCAL_C_INCLUDES := android include src
-LOCAL_LDLIBS := -Lobj/local/$(TARGET_ARCH_ABI)
+LOCAL_C_INCLUDES := $(HAMLIB_TOP_PATH)/android $(HAMLIB_TOP_PATH)/include $(HAMLIB_TOP_PATH)/src
 
 include $(BUILD_STATIC_LIBRARY)

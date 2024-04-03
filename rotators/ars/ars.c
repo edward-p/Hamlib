@@ -223,7 +223,12 @@ ars_close(ROT *rot)
 #ifdef HAVE_PTHREAD
     struct ars_priv_data *priv = (struct ars_priv_data *)rot->state.priv;
 
+#ifndef __ANDROID__
     pthread_cancel(priv->thread);
+#else
+    pthread_kill(priv->thread, SIGUSR2);
+#endif
+
 #endif
 
     /* leave it in safe state */

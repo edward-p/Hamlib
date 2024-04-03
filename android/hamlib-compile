@@ -7,7 +7,18 @@ HAMLIB=$(readlink -f $tmp/..)
 
 cd $HAMLIB
 
-rm -f $HAMLIB/include/config.h
+if [ ! -f "$HAMLIB/include/hamlib/config.h" ]; then
+    ln -s $HAMLIB/android/config.h $HAMLIB/include/hamlib/config.h
+fi
+
+if [ ! -f "$HAMLIB/src/hamlibdatetime.h" ]; then
+    if [ -x "$HAMLIB/.git" ]; then
+        echo "/* This date time is from the last non-merge commit to Hamlib. */" > $HAMLIB/src/hamlibdatetime.h
+        echo "#define HAMLIBDATETIME \"$(TZ=UTC git --git-dir=$HAMLIB/.git log --no-merges --date='format-local:%b %d %H:%M:%SZ %Y SHA=' --format='%cd' -n 1)$(git --git-dir=$HAMLIB/.git log --no-merges -n 1 | head -n 1 | cut -c8-13)\"" >> $HAMLIB/src/hamlibdatetime.h
+    else
+        cp $HAMLIB/src/hamlibdatetime.h.in $HAMLIB/src/hamlibdatetime.h
+    fi
+fi
 
 if [ "$1" = "clean" ]; then
     ndk-build NDK_PROJECT_PATH=$HAMLIB APP_BUILD_SCRIPT=$HAMLIB/Android.mk clean
